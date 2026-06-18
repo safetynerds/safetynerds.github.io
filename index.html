@@ -1,40 +1,245 @@
----
-permalink: /
----
-<!doctype html>
-<html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-  <title>Safety Nerds... coming soon</title>
+<!DOCTYPE html><html lang="en"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safety Nerds</title>
+<meta name="description" content="An open, cross-industry community learning from incidents — together. Meeting every Thursday since 2020.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4eee4;
+    --card: #fffdf9;
+    --ink: #2c2824;
+    --muted: #8c8378;
+    --soft: #5c554c;
+    --border: #ece3d7;
+    --accent: #5f9e80;
+    --accent-bg: rgba(95,158,128,0.13);
+    --accent-ink: #33523f;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body { font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  ::selection { background: rgba(95,158,128,0.22); }
+  a { color: inherit; }
+  .shell { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; }
+  .wordmark { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; display: flex; align-items: center; gap: 9px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .nav-join { font-size: 0.92rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; background: var(--accent-bg); padding: 9px 18px; border-radius: 999px; }
+
+  main { display: flex; flex-direction: column; gap: 22px; padding-bottom: 64px; }
+
+  /* HERO */
+  .hero { padding: 40px 8px 28px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .badge { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: var(--accent-ink); background: var(--accent-bg); padding: 7px 16px; border-radius: 999px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.5rem, 5.6vw, 4rem); line-height: 1.06; letter-spacing: -0.015em; max-width: 14ch; }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lead { font-size: 1.12rem; line-height: 1.65; color: var(--soft); max-width: 54ch; text-wrap: pretty; }
+  .affil { font-size: 0.98rem; line-height: 1.6; color: var(--muted); max-width: 52ch; }
+  .affil a { color: var(--accent-ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+  .btn { font-size: 1rem; font-weight: 600; color: #fff; background: var(--accent); padding: 14px 28px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px -10px var(--accent); display: inline-block; }
+
+  /* CARD */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 30px 32px; box-shadow: 0 1px 2px rgba(60,40,20,0.04), 0 18px 40px -28px rgba(60,40,20,0.22); }
+  h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
+
+  /* MEETING TIMES */
+  .meet-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .meet-head h2 { font-size: 1.7rem; }
+  .meet-head span { font-size: 0.92rem; color: var(--muted); }
+  .calls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .call { border-radius: 18px; padding: 20px 22px; }
+  .call.one { background: var(--accent-bg); }
+  .call.two { background: #f6f1e8; }
+  .call-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .call.one .call-label { color: var(--accent-ink); }
+  .call.two .call-label { color: #a07a52; }
+  .zones { display: flex; gap: 26px; margin-top: 14px; flex-wrap: wrap; }
+  .zone .tz { font-size: 0.8rem; color: var(--muted); }
+  .zone .time { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; }
+
+  /* TWO COLUMN */
+  .two-col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 22px; align-items: start; }
+  .two-col .col { display: flex; flex-direction: column; gap: 22px; }
+  .quotes h2 { font-size: 1.4rem; margin-bottom: 18px; }
+  .quote-list { display: flex; flex-direction: column; gap: 18px; }
+  blockquote { display: flex; flex-direction: column; gap: 7px; }
+  blockquote p { font-family: var(--serif); font-style: italic; font-size: 1.2rem; line-height: 1.5; color: #3a352e; }
+  blockquote cite { font-size: 0.82rem; color: var(--muted); font-style: normal; }
+  .rule { height: 1px; background: #efe7da; }
+  .members h2 { font-size: 1.25rem; margin-bottom: 14px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { font-size: 0.88rem; background: #f6f1e8; border-radius: 999px; padding: 6px 13px; }
+
+  /* INVITE */
+  .invite { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 32px; align-items: center; }
+  .invite-copy { display: flex; flex-direction: column; gap: 12px; }
+  .invite-copy h2 { font-size: 1.9rem; }
+  .invite-copy .p1 { font-size: 1.05rem; line-height: 1.6; color: var(--soft); max-width: 42ch; }
+  .invite-copy .p2 { font-size: 0.92rem; line-height: 1.6; color: var(--muted); }
+  .invite iframe { width: 100%; height: 560px; border: 1px solid var(--border); border-radius: 16px; background: #fff; }
+
+  /* DISCORD CTA */
+  .cta { background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 24px; padding: 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .cta-copy { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 10px; }
+  .cta-copy h2 { font-size: 1.9rem; color: var(--accent-ink); }
+  .cta-copy p { font-size: 1.05rem; line-height: 1.6; color: #4a443c; max-width: 48ch; }
+  .cta-link { align-self: flex-start; margin-top: 6px; font-size: 1rem; font-weight: 600; color: #fff; background: var(--accent); padding: 13px 26px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px -10px var(--accent); }
+  .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .qr-wrap img { border-radius: 18px; background: var(--card); padding: 12px; box-shadow: 0 8px 24px -14px rgba(60,40,20,0.4); display: block; width: 148px; height: 148px; }
+  .qr-wrap span { font-size: 0.8rem; color: var(--muted); }
+
+  /* TOPICS */
+  .topics { text-align: center; padding: 8px; }
+  .topics h2 { font-size: 1.25rem; color: var(--soft); margin-bottom: 16px; }
+  .topic-pills { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; max-width: 760px; margin: 0 auto; }
+  .topic { font-size: 0.9rem; color: var(--soft); background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid #e8dfd1; background: #f0e9dd; }
+  footer .shell { padding: 22px 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  footer p { font-size: 0.85rem; color: var(--muted); }
+  footer a { font-size: 0.85rem; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 760px) {
+    .calls, .two-col, .invite { grid-template-columns: 1fr; }
+    .invite iframe { height: 620px; }
+  }
+</style>
 </head>
-<body>
-  <nav class="container-fluid">
-      <ul>
-          <li><strong>Safety Nerds</strong></li>
-      </ul>
-      <ul>
-          <!-- <li><a href="/">Home</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/publications/" role="buPublicationstton">Publications</a></li> -->
-      </ul>
+<body style="">
+
+<div class="shell">
+  <nav>
+    <span class="wordmark"><span class="dot"></span>Safety Nerds</span>
+    <a class="nav-join" href="https://discord.gg/jFhPaVp4dx" target="_blank" rel="noopener">Join on Discord</a>
   </nav>
-  <main class="container">
-      <div class="grid">
-          <section>
-              <hgroup>
-                  <h1 style="text-align: center; font-size: 50px;">Safety Nerds... coming soon</h1>
-              </hgroup>
-            
-              <!-- <figure>
-                  <img src="https://source.unsplash.com/random/800x600?innovation" alt="Innovation Image">
-                  <figcaption>Discover our stories</figcaption>
-              </figure> -->
-          </section>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <span class="badge">An open community · meeting since 2020 · worldwide</span>
+      <h1 style="">Learn from incidents, <i style="color: rgb(95, 158, 128);">together</i></h1>
+      <p class="lead">A friendly, cross-industry circle of SREs, safety scientists, human-factors, pilots, accident investigators, and curious technologists. We meet every Thursday to share stories, share what we're learning from incidents as well as from normal work.</p>
+      <p class="affil">Many of us are also part of the <a href="https://resilienceinsoftware.org" target="_blank" rel="noopener">Resilience in Software Foundation</a>.</p>
+      <a class="btn" href="https://discord.gg/jFhPaVp4dx" target="_blank" rel="noopener" style="">Come say hello on Discord</a>
+    </section>
+
+    <!-- MEETING TIMES -->
+    <section class="card">
+      <div class="meet-head">
+        <h2>Every Thursday</h2>
+        <span>Two calls so every timezone gets a friendly hour.</span>
       </div>
+      <div class="calls">
+        <div class="call one">
+          <span class="call-label">CALL 1</span>
+          <div class="zones">
+            <div class="zone"><div class="tz">Los Angeles</div><div class="time">9:00 AM</div></div>
+            <div class="zone"><div class="tz">New York</div><div class="time">12:00 PM</div></div>
+            <div class="zone"><div class="tz">London</div><div class="time">5:00 PM</div></div>
+          </div>
+        </div>
+        <div class="call two">
+          <span class="call-label">CALL 2</span>
+          <div class="zones">
+            <div class="zone"><div class="tz">Los Angeles</div><div class="time">4:00 PM</div></div>
+            <div class="zone"><div class="tz">New York</div><div class="time">7:00 PM</div></div>
+            <div class="zone"><div class="tz">London</div><div class="time">12:00 AM</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTES + MEMBERS -->
+    <section class="two-col">
+      <div class="card quotes">
+        <h2>In members' words</h2>
+        <div class="quote-list">
+          <blockquote><p>“So many smart, interesting people to learn from across totally different industries.”</p><cite>— West Coast, US</cite></blockquote>
+          <div class="rule"></div>
+          <blockquote><p>“I can bring a challenge I'm facing at work and there's always great advice on how to tackle it.”</p><cite>— Europe</cite></blockquote>
+          <div class="rule"></div>
+          <blockquote><p>“It can be lonely doing something hard like LFI. Being around co-conspirators really helps.”</p><cite>— USA</cite></blockquote>
+          <div class="rule"></div>
+          <blockquote><p>“It recharges me to be around people who share my values on learning from incidents.”</p><cite>— New Zealand</cite></blockquote>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card members">
+          <h2>Members worldwide</h2>
+          <div class="pills">
+            <span class="pill">🇺🇸 United States</span>
+            <span class="pill">🇳🇿 New Zealand</span>
+            <span class="pill">🇮🇪 Ireland</span>
+            <span class="pill">🇩🇪 Germany</span>
+            <span class="pill">🇫🇮 Finland</span>
+            <span class="pill">🇦🇺 Australia</span>
+            <span class="pill">🇫🇷 France</span>
+            <span class="pill">🇪🇸 Spain</span>
+          </div>
+        </div>
+        <div class="card members">
+          <h2>What we talk about</h2>
+          <div class="pills">
+            <span class="pill">learning from incidents</span>
+            <span class="pill">human factors</span>
+            <span class="pill">SRE / DevOps</span>
+            <span class="pill">resilience engineering</span>
+            <span class="pill">safety culture</span>
+            <span class="pill">systems thinking</span>
+            <span class="pill">postmortems</span>
+            <span class="pill">incident management</span>
+            <span class="pill">cognitive systems</span>
+            <span class="pill">aviation safety</span>
+            <span class="pill">medical devices</span>
+            <span class="pill">incidents in the media</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUEST AN INVITE -->
+    <section class="card invite">
+      <div class="invite-copy">
+        <h2>Request a calendar invite</h2>
+        <p class="p1">Want the Thursday calls on your calendar? Drop your email and tell us which time works for you — we'll send the details.</p>
+        <p class="p2">See you on the call!</p>
+      </div>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc6Qb9WSbfm5KkgYKN4yjC9q_crbTYUbvP4buo2mXC9vwGaOw/viewform?embedded=true" title="Request a calendar invite" loading="lazy">Loading…</iframe>
+    </section>
+
+    <!-- DISCORD CTA -->
+    <section class="cta">
+      <div class="cta-copy">
+        <h2>Pull up a chair.</h2>
+        <p>Brand new to the field, a seasoned practitioner, or simply safety-curious — you belong here. The door's open.</p>
+        <a class="cta-link" href="https://discord.gg/jFhPaVp4dx" target="_blank" rel="noopener">discord.gg/jFhPaVp4dx</a>
+      </div>
+      <div class="qr-wrap">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;data=https%3A%2F%2Fdiscord.gg%2FjFhPaVp4dx&amp;bgcolor=fffdf9&amp;color=2c2824&amp;margin=10&amp;qzone=1" alt="QR code to join the Safety Nerds Discord" width="148" height="148">
+        <span>Scan to join</span>
+      </div>
+    </section>
+
   </main>
-  <footer class="container">
-      
-  </footer>
+</div>
+
+<footer>
+  <div class="shell">
+    <p>© Safety Nerds · safetynerds.com · meeting every Thursday since 2020</p>
+    <a href="https://forms.gle/n3cKDpSUYh3MNRnj7" target="_blank" rel="noopener">Remove me from the list</a>
+  </div>
+</footer>
+
+
 
 </body></html>
